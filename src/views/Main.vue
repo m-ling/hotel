@@ -1,8 +1,11 @@
 <template>
   <div class="main">
     <!-- <date></date> -->
-    <card></card>
+    <!-- <card></card> -->
     <!-- <banner2></banner2> -->
+    <!-- <more></more> -->
+    <banner3></banner3>
+
   </div>
 </template>
 
@@ -11,6 +14,8 @@
 import banner2 from '@/components/main/Banner2.vue'
 import date from '@/components/main/date.vue'
 import card from '@/components/main/card.vue'
+import more from "@/components/main/more4.vue"
+import banner3 from "@/components/main/Banner3.vue"
 
 export default {
   name: 'mian',
@@ -20,7 +25,7 @@ export default {
     }
   },
   components: {
-    banner2,date,card
+    banner2,date,card,more,banner3
   },
 //  created(){
 //    var url="/main";
