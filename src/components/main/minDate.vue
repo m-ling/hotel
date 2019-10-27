@@ -33,14 +33,15 @@ created(){
 }
 </script>
 <style scoped>
-.data-put { 
+ .data-put { 
   height: 53px;
   margin-left:20px; 
   border-bottom:2px solid #aaa; 
 }
 
-.flatpickr-input {
+.data-put .flatpickr-input {
   margin-left: 20px;
+  width: 67%;
   border:0 !important;
   outline:none;
 }

@@ -1,10 +1,11 @@
 <template>
   <div class="main">
-    <!-- <date></date> -->
-    <!-- <card></card> -->
-    <!-- <banner2></banner2> -->
-    <!-- <more></more> -->
+    <date></date>
+    <card></card>
+    <banner2></banner2>
+    <more></more>
     <banner3></banner3>
+    
 
   </div>
 </template>

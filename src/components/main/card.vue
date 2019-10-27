@@ -34,9 +34,11 @@ export default {
   
 }
 </script>
-<style scoped>
+<style scoped>     
 .card{
-  min-width: 1184px;
+    min-width: 1184px;
+    margin-top: 32%;
+    position: relative;
 }
 .card-outline{
      margin: 0 auto;

@@ -6,9 +6,12 @@ import store from './store'
 //全局组件
 import MyHeader from './components/whole/Header.vue'
 import MyFooter from './components/whole/Footer.vue'
+import Login from "./components/login.vue"
 
 Vue.component('my-header',MyHeader);
 Vue.component('my-footer',MyFooter);
+Vue.component("login",Login);
+
 
 //外部插件引入
 import VueAwesomeSwiper from 'vue-awesome-swiper'

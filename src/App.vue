@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <!-- <my-header></my-header> -->
+      <login></login>
       <router-link to="/">Main</router-link> |
       <router-link to="/about">About</router-link>
     </div>

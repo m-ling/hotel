@@ -53,6 +53,7 @@ watch:{
 <style  scoped>
  #host{
    width:100%;
+   min-width: 1150px;
    height:600px;
  }
  #host .data-sel{

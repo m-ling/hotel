@@ -3,7 +3,7 @@
 <div id="benner2" >
   <!-- 背景图片 -->
     <div class="benner-bimg"
-    :style="istrue==0? {background:`url(${require('@/assets/img/x-7.png')})`}
+    :style="istrue==0? {background:`url(${require('@/assets/img/x-7.png')}) `}
     :(istrue==1?  {background:`url(${require('@/assets/img/x-6.png')})`}
     :{background:`url(${require('@/assets/img/x-8.png')})`})"></div>
     <div class='ff'>
@@ -17,7 +17,7 @@
      <p v-else-if='istrue==1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;谈到世界级的美食、娱乐、购物和服务，北美地区当仁不让。体验纽约的盛世繁华，波士顿的历史和政治气息和华盛顿特区的新英格兰风情。如果您喜欢海滩和温暖气候，不妨前往迈阿密或卡努安岛度过美好假期。游览圣地亚哥，欣赏高耸入云的安第斯山脉风光，探索智利葡萄酒之乡。</p>
      <p v-else>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欧洲国家共同组成了一张紧凑的拼贴画，每个国家都有独具魅力的城市。伦敦、米兰和巴黎是时尚和设计的温床；布拉格、巴塞罗那和马德里则因其丰富的艺术底蕴令人沉迷。若要体验高山探险，请前往日内瓦或慕尼黑，或驻足中东和北美，体验我们令人放松的度假村。</p>
   <!-- 轮播图 -->
-  <swiper :options="swiperOption" ref="mySwiper" id="swipt1">
+  <swiper :options="swiperOption2" ref="mySwiper" id="swipt2">
     <!-- slides -->
     <swiper-slide v-for="(banner,a) of banners" :key='a' >
       <div  class="boo">
@@ -55,18 +55,18 @@
         title:['亚太地区','美洲','欧洲、中东和非洲'],
         banners:['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg'],
         // 轮播图
-        swiperOption: {
-        speed:300,
-        autoplay:true,
-        slidesPerView : 3,
-        freeMode: true,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-        }, navigation: {// 如果需要前进后退按钮
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }
+        swiperOption2: {
+          speed:300,
+          autoplay:true,
+          slidesPerView : 3,
+          freeMode: true,
+          pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+          }, navigation: {// 如果需要前进后退按钮
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            }
         }
       }
     },
@@ -90,7 +90,10 @@
   }
 </script>
 <style >
-#swipt1 .swiper-pagination-bullet-active{
+#swipt2{
+  height: 792px;
+}
+#swipt2 .swiper-pagination-bullet-active{
   background:#dbb684 !important;
   width:20px !important;
   border-radius: 38% !important;
@@ -108,7 +111,7 @@
    color:#696868;
    font-size:20px;
 }
-#swipt1{
+#swipt2{
   height: 430px;
   padding:50px 20px; 
   clear: both;
@@ -129,7 +132,8 @@
     width: 100%;
    height:800px;
    transition: 1s;
-   background-size: 100% !important; 
+   background-repeat:no-repeat; 
+   background-size: 101% 102% !important;
 }
 .ff{
   position: relative;
