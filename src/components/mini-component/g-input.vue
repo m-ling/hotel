@@ -1,7 +1,7 @@
 <template>
   <div id="g-inp">
     <label for="in">
-      <p>{{title}}</p>
+      <p class="inp-p">{{title}}</p>
      <div class="inpBlock">
         <input type="text" name="" id="in" :placeholder="inform">
      </div>
@@ -56,5 +56,9 @@ export default {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     z-index: 1;
+}
+.inp-p{
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
 }
 </style>
