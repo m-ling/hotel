@@ -41,6 +41,7 @@ axios.defaults.withCresentials=true/**3.配置保存session信息 */
 Vue.prototype.axios=axios /**4.axios 注册vue */
 //---end---------
 
+
 new Vue({
   router,
   store,

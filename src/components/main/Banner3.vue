@@ -39,6 +39,7 @@ export default {
                 autoplay:true,
                 slidesPerView : 3,
                 freeMode: true,
+   
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true

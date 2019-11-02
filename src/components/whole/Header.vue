@@ -17,7 +17,7 @@
          <li class="iconfont icon-user"></li>
        </ul>
        <div class="nav-botton" :style='`transform: translateX(${X}%);`' >
-         <a href="">查看房价</a>
+         <a href="javascript:;" @click="judgeLog">查看房价</a>
        </div>
      </div>
 
@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'; 
 export default {
   data(){
     return{
@@ -51,7 +52,14 @@ export default {
       }
      }
   },
+  computed: {
+    ...mapGetters(['theLog'])
+  },
   methods:{
+    judgeLog(){
+      console.log('是否登录');
+      console.log(this.theLog);
+    }
   
   },
   created(){
