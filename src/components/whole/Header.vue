@@ -6,31 +6,49 @@
          <li><a href="">首页</a></li>
          <li>||</li>
          <li class="iconfont icon-sousuo"></li>
-         <li><a href=""> 酒店介绍</a></li>
+         <li class="Header-down"  @mouseleave="lestDown">
+           <a href="" @mouseenter="getDown"> 酒店介绍</a>
+           <p v-if="dd" class="iconfont icon-cebianlan-kongxin"></p>
+           </li>
          <li><a href=""> 优惠</a></li>
          <li><a href=""> 餐饮美食</a></li>
-         <li><a href=""> 健康</a></li>
+         <li><a href="">健康</a></li>
        </ul>
        <ul class="nav-list2" :style='`line-height:${l_h2}px;width:${l_w1}%;`'>
          <li><a href=""> 礼品卡</a></li>
-         <li><a href=""> Fans of M.O. </a></li>
+         <li><a href="javascript:;" @click="judgeLog"> Fans of M.O. </a></li>
          <li class="iconfont icon-user"></li>
        </ul>
        <div class="nav-botton" :style='`transform: translateX(${X}%);`' >
          <a href="javascript:;" @click="judgeLog">查看房价</a>
        </div>
-     </div>
+        </div>
+       <div v-if="dd" class="nav-down" @mouseenter="getDown" @mouseleave="lestDown" :style="`top:${Top}px`">
+         <ul>
+           <li>上海</li>
+           <li>|</li>
+           <li>北京</li>
+           <li>|</li>
+           <li>三亚</li>
+           <li>|</li>
+           <li>巴黎</li>
+           <li>|</li>
+           <li>东京</li>
+         </ul>
+       </div>
+    
 
  
 
   </div>
 </template>
 <script>
-import {mapGetters} from 'vuex'; 
+import {mapMutations} from 'vuex'
+
 export default {
   data(){
     return{
-        h1:90,ts1:0,ts2:0,l_h1:50,l_h2:50,l_w1:34,X:99
+        h1:90,ts1:0,ts2:0,l_h1:50,l_h2:50,l_w1:40,X:99,Top:91,dd:false
     }
   },mounted(){
     window.onscroll=()=>{
@@ -40,26 +58,36 @@ export default {
          this.l_h1=24;
          this.l_h2=34;
          this.X=0;
-         this.l_w1=36;
+         this.Top=63;
          this.ts1=.1;
       }else{
          this.h1=90;
          this.l_h1=50;
          this.l_h2=50;
          this.X=99;
-         this.l_w1=34;
          this.ts1=.4;
+         this.Top=91;
       }
      }
   },
-  computed: {
-    ...mapGetters(['theLog'])
-  },
+  // computed:{
+  // ...mapMutations(['changeLog'])
+  // },
+
   methods:{
+    ...mapMutations(['changeLog','showPrompt','selicon']),
     judgeLog(){
-      console.log('是否登录');
-      console.log(this.theLog);
+      this.changeLog();
+      this.selicon(0);
+      this.showPrompt();
+    },
+    getDown(){
+      this.dd=true;
+    },
+    lestDown(){
+      this.dd=false;
     }
+
   
   },
   created(){
@@ -69,23 +97,27 @@ export default {
 <style scoped>
 .nav-box{
   width: 100%;
-  background-image: linear-gradient(to bottom,#ffffff,#ebeaea);
   border-bottom: 2px solid #e2e0de;
   color: #575656 !important;
   font-family: "Didot LT W02 Roman",Didot,"Hoefler Text",Garamond,"Times New Roman",serif !important;
-  font-size: 1.375rem;
+  font-size: 21px;
   position:fixed;
   display:flex;
   z-index:2;
   min-width: 1200px;
+  background:#fff;
+  box-shadow: 0 0 20px 10px rgba(172, 172, 172, 0.63);
   
 }
 .nav-list{
     display: block;
-    width: 62%;
+    width: 55%;
     height: 80px;
     padding: 0px;
-    transition:.7s ; 
+    -webkit-transition: .7s;
+    transition: .7s;
+    display: flex;
+    flex-flow: nowrap;
 }
 .nav-list img{
   width:53px;
@@ -122,19 +154,63 @@ margin-right: 4px;
 }
 .nav-list2{
     display: block;
-    transition: .7s ; 
+    -webkit-transition: .7s;
+    transition: .7s;
     height: 50px;
     line-height: 60px;
+    display: flex;
+    flex-flow: nowrap;
 }
 .nav-botton{
     height: 100%;
     width:13%;
-    background: #b17b06;
+    background:#b02909;
     text-align: center;
     line-height: 71px;
     overflow: hidden;
     transition:.7s .1s; 
-    
 }
-
+.nav-botton:hover{
+      background: #891e04;
+}
+.nav-botton a{
+  color:#fff !important;
+}
+.nav-botton a:hover{
+  color:#fff !important;
+}
+.nav-down{
+    background: #e0d3b5;
+    height: 49px;
+    position: fixed;
+    width: 76%;
+    top: 65px;
+    left: 98px;
+    -webkit-transition: .5s;
+    transition: .5s;
+    border-radius: 9px;
+    z-index: 3;
+    font-size: 16px;
+}
+.nav-down ul{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.nav-down ul li{
+  margin-left: 27px; 
+  cursor: pointer;
+}
+.HeaderShow{
+  display:block;
+}
+.icon-cebianlan-kongxin{
+    position: absolute;
+    font-size: 31px;
+    top: 21px;
+    left: 252px;
+    color: #b17b06;
+}
+.nav-down ul li:nth-child(n):hover{
+   color:#a57203;
+}
 </style>

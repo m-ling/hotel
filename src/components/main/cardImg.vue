@@ -41,6 +41,7 @@ export default {
     font-size: 16px;
     text-align: center;
     line-height: 17px;
+    cursor: pointer;
  }
  .cardImg .btn:hover{
    color: #fff;

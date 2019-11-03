@@ -1,10 +1,10 @@
 <template>
     <div id="login">
       <!-- 遮罩 -->
-      <div v-show="logShow" class="shade"></div>
+      <div v-show="!islogin" class="shade"></div>
 
        <!-- title -->
-       <div class="log-swp" :class="{down:!logShow}">
+       <div class="log-swp" :class="{down:islogin}">
         <div class="log-logo">
         <!--叉-->
             <p class="iconfont icon-cha-copy" @click="LogDel"></p>
@@ -76,14 +76,15 @@
     </div>
 </template>
 <script>
-import gInput from "./mini-component/g-input.vue"
-import {mapGetters,mapMutations,mapState} from 'vuex'; 
+ import {mapState, mapMutations} from 'vuex'; 
+import gInput from "../mini-component/g-input.vue";
+
 
   export default {
     name: 'carrousel',
     data() {
       return {
-        logShow:true,
+        // logShow:true,
         LS:true,
         RS:true,
         log:[],
@@ -103,18 +104,12 @@ import {mapGetters,mapMutations,mapState} from 'vuex';
         } 
       }
     },
-    computed: {
-    // ...mapGetters(['theLog']),
-    // ...mapMutations(['changeLog']),
-    // ...mapState(['islogin'])
-
-    },
     components:{ gInput },
     methods:{
         LogDel(){
-          // this.logShow=false;
-          console.log(islogin)
-          console.log(this.islogin);
+          //  this.logShow=false;
+          // console.log(islogin)
+          this.changeLog
         },
         prev(){//点击向左按钮
           this.swiper.slidePrev();
@@ -170,22 +165,14 @@ import {mapGetters,mapMutations,mapState} from 'vuex';
  
     },
     computed: {
-      swiper() {
-        
-        return this.$refs.mySwiperL.swiper
-  
-      }
+       ...mapState(['islogin','fa']),
+       ...mapMutations(['changeLog']),
+      swiper(){return this.$refs.mySwiperL.swiper}
     },
    
     mounted() {
-      // current swiper instance
       // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
       console.log('this is current swiper instance object', this.swiper.on())
-      // this.swiper.slideTo(3, 1000, false)
-      // 
-      // this.swiper.on('touchEnd', function () {
-      //   console.log(999)
-      // });
       
     }
   }

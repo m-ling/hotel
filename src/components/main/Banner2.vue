@@ -1,6 +1,6 @@
 <!-- The ref attr used to find the swiper instance -->
 <template>
-<div id="benner2" >
+<div id="benner2" style="height: 1030px;">
   <!-- 背景图片 -->
     <div class="benner-bimg"
     :style="istrue==0? {background:`url(${require('@/assets/img/x-7.png')}) `}
@@ -22,7 +22,13 @@
     <swiper-slide v-for="(banner,a) of banners" :key='a' >
       <div  class="boo">
          <img :src="require(`@/assets/img/b2-y${istrue}-${banner}`)" alt="" class="swi_ter" style="width:95%;">
-         <div>{{istrue|findSite(a)}}</div>
+         <span >{{istrue|findSite(a)}}</span>
+         <div class="boo-title" >
+           <div class="boo-base">{{istrue|findSite(a)}} 
+           <span>了解一下></span>
+           </div>
+           
+         </div>
       </div>
      </swiper-slide>
     <!-- Optional controls -->
@@ -36,6 +42,7 @@
 </template>
 
 <script>
+
   export default {
     name: 'carrousel',
     filters:{
@@ -146,6 +153,7 @@
 #benner2 .benner-bimg{
     width: 100%;
    height:800px;
+   margin-top: 88px;
    transition: 1s;
    background-repeat:no-repeat; 
    background-size: 101% 102% !important;
@@ -175,7 +183,6 @@
 }
 .swi_ter:hover{
   width:100% !important;
-  border-bottom:5px solid burlywood;
 }
 .boo{
   width:100%; height:361px;
@@ -190,5 +197,45 @@
   font-size:3.125rem !important;
   font-family: "Didot LT W02 Roman",Didot,"Hoefler Text",Garamond,"Times New Roman",serif !important;
    margin-top:20px !important;
+}
+.boo-title{
+    width: 100.5%;
+    height: 47px;
+    overflow: hidden;
+    transition: .3s;
+
+}
+.boo-base{
+     width: 91%;
+    height: 7px;
+    background: #d2b473;
+    padding: 20px;
+    line-height: 7px;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 12px;
+    font-size: 17px;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+.boo-base span{
+    position: absolute;
+    right: 49px;
+}
+.boo:hover .boo-base{
+  transform: translateY(0);
+}
+.boo:hover.boo>span{
+  display: none;
+}
+.boo>span{
+    color: #ffffff;
+    font-size: 20px;
+    position: absolute;
+    bottom: 100px;
+    left: 40px;
+    border-bottom: 1px solid #fff;
+    width: 32%;
 }
 </style>

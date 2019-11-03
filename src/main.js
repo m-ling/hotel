@@ -6,11 +6,13 @@ import store from './store'
 //全局组件
 import MyHeader from './components/whole/Header.vue'
 import MyFooter from './components/whole/Footer.vue'
-import Login from "./components/login.vue"
+import Login from "./components/whole/login.vue"
+import Prompt from "./components/mini-component/prompt.vue"
 
 Vue.component('my-header',MyHeader);
 Vue.component('my-footer',MyFooter);
 Vue.component("login",Login);
+Vue.component("prompt",Prompt)
 
 
 //外部插件引入

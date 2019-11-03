@@ -23,7 +23,7 @@
           <min-date></min-date>
           <span>到</span>
           <min-date :ph="'退房'"></min-date>
-          <p>+添加优惠代码</p>
+          <p>+添加优惠</p>
           <div class="data-button">查看房价</div>
         </div>
        
@@ -76,7 +76,7 @@ watch:{
  .data-text p{
     padding-top: 66px;
     padding-left: -56px;
-    font-size: 3.3125rem;
+    font-size: 50px;
     color: #fff;
     font-family: "Didot LT W02 Bold",Didot,"Hoefler Text",Garamond,"Times New Roman",serif;
     font-style: italic;
@@ -107,12 +107,17 @@ watch:{
  }
 
 .data-data{
-  width: 100%;
-  height: 100%;
-  display:flex;
-  justify-content:space-around;
-  position:absolute;
-  top:0px;left:20px;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-flow: nowrap;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    position: absolute;
+    top: 0px;
+    left: 22px;
   
 }
 .data-data .select{
@@ -142,6 +147,7 @@ watch:{
   color:#74382e;
 }
 .data-data p{
+  width: 80px;
   color:#b02909;;
   margin-top: 4px;
   font-size: .8125rem;
