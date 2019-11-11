@@ -15,14 +15,18 @@
   </div>
 </template>
 <script>
+/**登录注册专用表单组件 */
+
 export default {
-  props:["title",'inform','name','Warn','col'],
-  RegSta:true,
-  LogSta:true,
+  props:["title",'inform','name','Warn','col','pwd'],
+
   data(){
     return{
       inpVal:'',
       warn:'',
+      val3:'',
+      RegSta:true,
+      LogSta:true,
     }
   },
   methods:{
@@ -42,32 +46,45 @@ export default {
     inpVal(){
      this.warn=this.Warn;
      var val=this.inpVal;
-       var warn=this.warn;
+     var warn=this.warn;
+     var i=parseInt(this.name);
        if(!val){
         this.warn='不能为空呦~'
         this.RegSta=false;
         this.LogSta=false;
        }else{
-          var i=parseInt(this.name);
-         console.log(typeof i)
          switch (i) {
-           case 0:    
+           case 0: //用户名   
            if(/^[a-z0-9]{4,8}$/.test(val)){
            this.warn="";
            this.RegSta=true;
            }else{this.RegSta=false;}
            break;
-           case 1:    
-           if(/^[a-z0-9]{11}$/.test(val)){
+           case 1: //邮箱
+           if(/^(\w)+@((\.\w{2,3}){1,2})$/.test(val)){
            this.warn="";
            this.RegSta=true;
            }else{this.RegSta=false;}
            break;
-           case 2:    
-          if(/^[a-z0-9]{4,8}$/.test(val)){
+           case 2: //手机号
+          if(/^[a-z0-9]{11}$/.test(val)){
            this.warn="";
            this.RegSta=true;
            }else{this.RegSta=false;}
+           break;
+            case 3:  //密码
+           if(/^[a-z0-9]{4,10}$/.test(val)){
+           this.warn="";
+           this.RegSta=true;
+           }else{this.RegSta=false;}
+           break;
+            case 4:  //确认密码
+           if(val==this.pwd[3]){
+           this.warn="";
+           this.RegSta=true;
+           }else{
+              this.warn="两次密码必须一致";
+             this.RegSta=false;}
            break;
          }}
     },

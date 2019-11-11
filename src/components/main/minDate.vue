@@ -1,13 +1,13 @@
+
 <template>
    <div class="data-put">
-             <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-rili"></use>
-          </svg>
-          <!-- <Flatpickr :options="fpOptions" v-model="dateStr" placeholder="退房" /> -->
+          <span class="iconfont icon-rili"></span>
             <flat-pickr v-model="date" :placeholder="ph" ></flat-pickr>
          </div>
 </template>
 <script>
+//******* 日期选择组件*/
+
 export default {
   props:{
     ph:{default:""} 

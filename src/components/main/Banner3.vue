@@ -42,8 +42,10 @@ export default {
    
                 pagination: {
                     el: '.swiper-pagination',
-                    clickable: true
-                }, navigation: {// 如果需要前进后退按钮
+                    clickable: true,
+                    autoHeight: true
+                }, 
+                navigation: {// 如果需要前进后退按钮
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 }

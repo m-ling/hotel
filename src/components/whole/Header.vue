@@ -16,7 +16,7 @@
        </ul>
        <ul class="nav-list2" :style='`line-height:${l_h2}px;width:${l_w1}%;`'>
          <li><a href=""> 礼品卡</a></li>
-         <li><a href="javascript:;" @click="judgeLog"> Fans of M.O. </a></li>
+         <li><a href="javascript:;" @click="needLog"> Fans of M.O. </a></li>
          <li class="iconfont icon-user"></li>
        </ul>
        <div class="nav-botton" :style='`transform: translateX(${X}%);`' >
@@ -52,7 +52,8 @@ export default {
     }
   },mounted(){
     window.onscroll=()=>{
-      var scrollH=document.body.scrollTop||document.documentElement.scrollTop;
+      // var scrollH=document.body.scrollTop||document.documentElement.scrollTop;
+      var scrollH=window.pageYOffset
       if(scrollH>=10){
          this.h1=62;
          this.l_h1=24;
@@ -76,10 +77,14 @@ export default {
 
   methods:{
     ...mapMutations(['changeLog','showPrompt','selicon']),
-    judgeLog(){
+    needLog(){
       this.changeLog();
-      this.selicon(0);
-      this.showPrompt();
+    },
+    judgeLog(){
+      // this.changeLog();
+      // this.selicon(4);
+      // this.showPrompt();
+       this.$router.push('/about/12')
     },
     getDown(){
       this.dd=true;
@@ -97,7 +102,7 @@ export default {
 <style scoped>
 .nav-box{
   width: 100%;
-  border-bottom: 2px solid #e2e0de;
+  border-bottom: 1px solid #c0c0c0;
   color: #575656 !important;
   font-family: "Didot LT W02 Roman",Didot,"Hoefler Text",Garamond,"Times New Roman",serif !important;
   font-size: 21px;
@@ -140,7 +145,7 @@ margin-right: 4px;
   color:#b17b06 !important;
 }
 .nav-list2 li:nth-child(2){
-     font-family: "Trade Gothic LT W04 Bd CnNo-20","ArialNarrow","Arial-Narrow","Arial Narrow",Arial,sans-serif;
+     font-family: eng_1;
     text-transform: uppercase;
     font-size: .875rem;
     letter-spacing: .05rem;

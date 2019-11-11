@@ -41,7 +41,14 @@ import axios from 'axios'/**1.引入axios */
 axios.defaults.baseURL='http://127.0.0.1:4040'/**2.配置服务器基础路径 */
 axios.defaults.withCresentials=true/**3.配置保存session信息 */
 Vue.prototype.axios=axios /**4.axios 注册vue */
-//---end---------
+//---end---------!store.state.logSta
+
+import Router from 'vue-router'
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+return routerPush.call(this, location).catch(error=> error)
+}
+
 
 
 new Vue({

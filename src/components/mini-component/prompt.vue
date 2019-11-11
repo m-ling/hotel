@@ -9,6 +9,8 @@
   </div>
 </template>
 <script>
+/**  弹窗 */
+
 import {mapState,mapMutations} from 'vuex'
 export default {
   data(){
@@ -37,7 +39,7 @@ export default {
     color: #dad7d1;
 }
 .prompt-icn{
-  font-size: 80px;
+  font-size: 60px;
   margin: auto;
   display: block;
 }

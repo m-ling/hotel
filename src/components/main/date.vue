@@ -24,7 +24,7 @@
           <span>到</span>
           <min-date :ph="'退房'"></min-date>
           <p>+添加优惠</p>
-          <div class="data-button">查看房价</div>
+          <div class="data-button" @click="Look">查看房价</div>
         </div>
        
       </div>
@@ -38,6 +38,11 @@ import minDate from '@/components/main/minDate.vue'
 export default {
   data () {
   return {
+  }
+},
+methods:{
+  Look(){
+    this.$router.push('/about/12')
   }
 },
 components:{

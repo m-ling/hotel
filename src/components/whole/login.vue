@@ -26,7 +26,7 @@
               @getput="getput" :inform="'请输入会员名或邮箱'" 
               :name="0" :Warn="'请输入4-8位用户名'" :col='col' ></g-input>
                <g-input :title="'密码'" :inform="'请输入密码'"
-                @getput="getput" :name="1" :Warn="'请输入6-10位密码'" :col='col'></g-input>
+                @getput="getput" :name="3" :Warn="'请输入6-10位密码'" :col='col'></g-input>
                <a href="">忘记密码？</a>
                <button  @click="onLogin">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
             </div>
@@ -62,7 +62,7 @@
                <div class="reg-box">
                    <g-input v-for="(reg,i) of Regs" :key="i"
                     :title="reg.title" :inform="reg.inform" 
-                    :name="reg.name" @getReg="getReg" :Warn="reg.Warn" :col='col'
+                    :name="reg.name" @getReg="getReg" :Warn="reg.Warn" :col='col' :pwd="isreg"
                     ></g-input>
                     <div class="log-btn" @click="Regiater">NEXT</div>
                </div>
@@ -78,6 +78,7 @@
 <script>
  import {mapState, mapMutations} from 'vuex'; 
 import gInput from "../mini-component/g-input.vue";
+import ajaxJs from '../../../src/assets/js/axios.js';
 
 
   export default {
@@ -95,8 +96,8 @@ import gInput from "../mini-component/g-input.vue";
           {name:'0',inform:"请输入会员名",title:"会员名",Warn:"请输入6-8位用户名"},
           {name:'1',inform:"请输入邮箱",title:"邮箱",Warn:"请输入邮箱，注意格式"},
           {name:'2',inform:"请输入手机号码",title:"手机号码",Warn:"请输入11位手机号码"},
-          {name:'3',inform:"请输入密码",title:"密码",Warn:"请输入密码"},
-          {name:'4',inform:"请确认密码",title:"确认密码",Warn:"请确认密码"}
+          {name:'3',inform:"请输入密码",title:"密码",Warn:"请输入密码,不超过10位"},
+          {name:'4',inform:"请确认密码",title:"确认密码",Warn:"请确认密码",pwd:'isreg'}
           ],
         swiperOption: {
            loop:true,
@@ -104,13 +105,19 @@ import gInput from "../mini-component/g-input.vue";
         } 
       }
     },
+    computed:{
+    ...mapState(['thePrompt','icon','isPrompt','islogin','the','logSta']),
+    swiper(){return this.$refs.mySwiperL.swiper}
+  },
     components:{ gInput },
     methods:{
+        ...mapMutations(['changeLog','showPrompt',
+        'selicon','changeProText','changeLogSta']),
         LogDel(){
           //  this.logShow=false;
           // console.log(islogin)
-          this.changeLog
-        },
+          this.changeLog();
+        }, 
         prev(){//点击向左按钮
           this.swiper.slidePrev();
         },
@@ -119,7 +126,7 @@ import gInput from "../mini-component/g-input.vue";
         },
         getput(vals,name,LogSta,col){//登录时的自定义函数
           this.log[name]=vals;
-          this.LS=LogSta;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+          this.LS=LogSta;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         },
         getReg(vals,name,RegSta){
           this.isreg[name]=vals;
@@ -127,24 +134,27 @@ import gInput from "../mini-component/g-input.vue";
         },
         onLogin(){//点击登录 发送ajax请求
           if(this.LS){
-                var hname=this.log[0];
-              var hpwd=this.log[1];
-              this.axios.get('/login',{params:{hname,hpwd}})
-              .then(res=>{
+              var hname=this.log[0];
+              var hpwd=this.log[3];
+             ajaxJs.getLog(res=>{
                   if(res.data.code==1){
-                    alert('登陆成功')
+                    sessionStorage.setItem('user',hname);
+                    this.showPrompt(1);//弹窗
+                    this.changeLogSta();//改变登录状态
+                    this.changeLog();
                   }else{
                     alert('账号或密码错误')
                   }
-              }).catch(err=>{
-                console.log(err);
-              })
+              },hname,hpwd)
            }else{
-             this.col='#e22323';
-             alert('错误')
+            this.col='#e22323';
+            this.selicon(0);
+            this.showPrompt();
+            console.log(this.thePrompt);
+            this.changeProText(0);
            }
         },
-        Regiater(){
+        Regiater(){//点击注册
           if(this.RS){
               console.log(this.isreg);
               var hname=this.isreg[0];
@@ -153,21 +163,20 @@ import gInput from "../mini-component/g-input.vue";
               var hpwd=this.isreg[3];
               this.axios.get('/reg',{params:{hname,email,phone,hpwd}})
               .then(res=>{
-                console.log(res);
+                 this.showPrompt(3);//弹窗
+                 this.swiper.slidePrev();
               }).catch(err=>{
                 console.log(err);
               })
           }else{
             this.col='#ea1a22';
-            alert('错了')
+            console.log(this.thePrompt);
+            this.changeProText(0);
+            this.selicon(0);
+            this.showPrompt();
           }
         }
  
-    },
-    computed: {
-       ...mapState(['islogin','fa']),
-       ...mapMutations(['changeLog']),
-      swiper(){return this.$refs.mySwiperL.swiper}
     },
    
     mounted() {
@@ -240,12 +249,16 @@ import gInput from "../mini-component/g-input.vue";
     text-align: center;
     line-height: 50px;
     position: absolute;
-    bottom: 10px !important;
-    left: 384px !important;
+    bottom: 10px ;
+    left: 384px ;
     border-radius: 4px;
     background: #ceb780;
     color: #242021;
     font-size: 20px;
+  }
+  #login .log-right .log-btn{
+    bottom: 39px !important;
+    left: 46px !important;
   }
 .log-left a{
     color: #757070 !important;
@@ -346,11 +359,6 @@ import gInput from "../mini-component/g-input.vue";
 .reg-left .icon-jiantou2:hover{
    transform:  translate(-20px);
 }
-.reg-right .log-btn{
-    width: 139px !important;
-    bottom: 68px !important;
-    left: 57% !important;
-}    
 .reg-right .reg-box{
   display: flex;
   width: 100%;
